@@ -1,23 +1,26 @@
-package practica1;
+package Modelo;
 
 public class Empleado {
 	private String dni;
 	private String nombre;
 	private String apellidos;
 	private double salario;
+	private int dpto;
 	
 	public Empleado() {
 		this.dni=dni;
 		this.nombre=nombre;
 		this.apellidos=apellidos;
 		this.salario=salario;
+		this.dpto=dpto;
 	}
 	
-	public Empleado(String d,String n, String a,double s) {
+	public Empleado(String d,String n, String a,double s,int de) {
 		this.dni=d;
 		this.nombre=n;
 		this.apellidos=a;
 		this.salario=s;
+		this.dpto=de;
 	}
 
 	public String getDni() {
@@ -52,11 +55,22 @@ public class Empleado {
 		this.salario = salario;
 	}
 
+	public int getDpto() {
+		return dpto;
+	}
+
+	public void setDpto(int dpto) {
+		this.dpto = dpto;
+	}
+
 	@Override
 	public String toString() {
 		return "Empleado [Dni=" + dni + ", Nombre=" + nombre + ", Apellidos=" + apellidos + ", Salario=" + salario
-				+ "]";
+				+ ", Dpto=" + dpto + "]";
 	}
+
+	
+	
 	
 	
 
