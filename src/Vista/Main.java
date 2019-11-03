@@ -158,7 +158,6 @@ public class Main {
 				System.out.println("Introduzca nombre");
 				n=teclado.nextLine();
 				departamento.setNombre(n);
-				
 				departamento=new Departamento(id,n);
 				System.out.println(departamento);
 				dc=new DepartamentoController();
@@ -187,7 +186,7 @@ public class Main {
 				System.out.println("Introduzca el ID del Departamneto que solicita informacion");
 				id=teclado.nextInt();
 				deco=new DepartamentoController();
-				deco.informacionDepartamentoPorID(id);
+				deco.informacionDepartamentoPorId(id);
 				break;
 			case 14:
 				System.out.println("Informacion de un departamento");

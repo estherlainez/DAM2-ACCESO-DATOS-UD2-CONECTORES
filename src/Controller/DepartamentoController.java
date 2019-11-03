@@ -86,12 +86,12 @@ public class DepartamentoController {
 	}
 
 
-	public void informacionDepartamentoPorID(int id) {
+	public void informacionDepartamentoPorNombre(String n) {
 		Connection conexion=EmpleadoController.CreaConexion();
-		String sql="select * from departamentos where departamentos.ID=?";
+		String sql="select * from departamentos where departamentos.nombre=?";
 		try {
 			PreparedStatement sentencia=conexion.prepareStatement(sql);
-			sentencia.setInt(1, id);
+			sentencia.setString(1, n);
 			ResultSet resul=sentencia.executeQuery();
 			while(resul.next()) {
 				int ID=resul.getInt("ID");
@@ -105,12 +105,13 @@ public class DepartamentoController {
 		}
 	}
 	
-	public void informacionDepartamentoPorNombre(String n) {
+	
+	public void informacionDepartamentoPorId(int id) {
 		Connection conexion=EmpleadoController.CreaConexion();
-		String sql="select * from departamentos where departamentos.nombre=?";
+		String sql="select * from departamentos where departamentos.ID=?";
 		try {
 			PreparedStatement sentencia=conexion.prepareStatement(sql);
-			sentencia.setString(1, n);
+			sentencia.setInt(1, id);
 			ResultSet resul=sentencia.executeQuery();
 			while(resul.next()) {
 				int ID=resul.getInt("ID");
@@ -134,7 +135,9 @@ public class DepartamentoController {
 			
 			int valor=sentencia.executeUpdate();
 			System.out.println(valor);
-			
+			//boolean hayMas=false;
+			//hayMas= execute(sql);
+
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -142,6 +145,33 @@ public class DepartamentoController {
 		
 	}
 	
+	
+	/*
+	public void informacionDepartamentoPorID(int num) {
+		Connection conexion=EmpleadoController.CreaConexion();
+		String sql="select * from departamentos where departamentos.ID=? &&"
+				+ "select * from empleados where empleados.dpto=?";
+		try {
+			PreparedStatement sentencia=conexion.prepareStatement(sql);
+			sentencia.setInt(1, num);
+			ResultSet resul=sentencia.executeQuery();
+			while(resul.next()) {
+				int ID=resul.getInt("ID");
+				String nombre=resul.getString("nombre");
+				System.out.println("ID "+ID+" Nombre: "+nombre);
+				String nif=resul.getString("nif");
+				String nombreE=resul.getString("nombre");
+				String ap=resul.getString("apellidos");
+				double s=resul.getDouble("salario");
+				System.out.println("Nif "+nif+" Nombre: "+nombre+" Apellidos "+ap+" Salario "+s);
+			}
+			System.out.println();
+			sentencia.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	*/
 	
 	
 }
