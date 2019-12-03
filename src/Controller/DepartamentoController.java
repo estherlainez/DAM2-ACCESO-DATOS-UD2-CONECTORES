@@ -1,6 +1,7 @@
 package Controller;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import Modelo.Departamento;
 import Modelo.Empleado;
@@ -19,19 +20,21 @@ public class DepartamentoController {
 			ps.setInt(1, id);
 			ps.setString(2, no);
 			
-			int valor=ps.executeUpdate();
+			//int valor=ps.executeUpdate();
 			
-			if(ps.executeUpdate()>0) {
-				System.out.println(valor+" fila afectada");
+			if(ps.executeUpdate()==1) {
+				//System.out.println(valor+" fila afectada");
 				ps.close();
 				return true;
 				
 			}else {
+				ps.close();
 				return false;
 			}
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
+			e1.getErrorCode();
 		}
 		return false;
 
@@ -48,10 +51,10 @@ public class DepartamentoController {
 			ps.setInt(1,id);
 			ps.setString(2,no);
 			
-			int v=ps.executeUpdate();
+			//int v=ps.executeUpdate();
 			
-			if(ps.executeUpdate()>0) {
-				System.out.println(v+" fila afectada");
+			if(ps.executeUpdate()>=1) {
+				//System.out.println(v+" fila afectada");
 				ps.close();
 				return true;
 				
@@ -68,6 +71,7 @@ public class DepartamentoController {
 	
 	
 	public void mostrarDepartamentos() {
+		//CON ARRAYLIST
 		Connection c=EmpleadoController.CreaConexion();
 		String sql="select * from departamentos";
 		try {
@@ -86,23 +90,27 @@ public class DepartamentoController {
 	}
 
 
-	public void informacionDepartamentoPorNombre(String n) {
+	public ArrayList<Departamento> informacionDepartamentoPorNombre(String n) {
 		Connection conexion=EmpleadoController.CreaConexion();
 		String sql="select * from departamentos where departamentos.nombre=?";
 		try {
 			PreparedStatement sentencia=conexion.prepareStatement(sql);
 			sentencia.setString(1, n);
 			ResultSet resul=sentencia.executeQuery();
+			
+			ArrayList <Departamento> dpts=new ArrayList<Departamento>();
 			while(resul.next()) {
 				int ID=resul.getInt("ID");
 				String nombre=resul.getString("nombre");
-				System.out.println("ID "+ID+" Nombre: "+nombre);
+				dpts.add(new Departamento(ID,nombre));
 			}
-			System.out.println();
 			sentencia.close();
+			return dpts;
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	
@@ -127,17 +135,23 @@ public class DepartamentoController {
 	
 	public void borrarDepartamento(int  idBorrar) {
 		Connection c=EmpleadoController.CreaConexion();
+		//primero hago un select empleados donde departamento=idBorrar
+		//luego borro
+		
 		
 		try {
+			PreparedStatement asd=c.prepareStatement("SELECT * from empleados where dpto=?");
+			//ResulSet asdf=asd.executeQuery(sql);
 			String sql = "delete from departamentos where departamentos.ID =?";
 			PreparedStatement sentencia= c.prepareStatement (sql);
 			sentencia.setInt (1, idBorrar);
 			
 			int valor=sentencia.executeUpdate();
 			System.out.println(valor);
-			//boolean hayMas=false;
-			//hayMas= execute(sql);
-
+			if(sentencia.executeUpdate()>=1) {
+				
+			}
+			
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();

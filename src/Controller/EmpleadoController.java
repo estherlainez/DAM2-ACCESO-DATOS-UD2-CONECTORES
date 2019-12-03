@@ -74,7 +74,6 @@ public class EmpleadoController {
 			p.setDouble(4, sa);
 			p.setInt(5, dep);
 			
-			int valor=p.executeUpdate();
 			
 			if(p.executeUpdate()==1) {
 				System.out.println(1+" fila afectada");
@@ -102,17 +101,17 @@ public class EmpleadoController {
 		int dep=e.getDpto();
 		
 		try {
-			String modificar= "update empleados set nif=?,nombre=?,apellidos=?,salario=?,dpto=? where empleados.nif="+dni;
+			String modificar= "update empleados set nif=?,nombre=?,apellidos=?,salario=?,dpto=? where empleados.nif=?";
 			PreparedStatement ps=c.prepareStatement(modificar);
 			ps.setString(1,dn);
 			ps.setString(2,no);
 			ps.setString(3,ap);
 			ps.setDouble(4, sa);
 			ps.setInt(5, dep);
-			
+			ps.setString(6,dni);
 			int v=ps.executeUpdate();
 			
-			if(ps.executeUpdate()>0) {
+			if(v>0) {
 				System.out.println(v+" fila afectada");
 				ps.close();
 				return true;
@@ -263,7 +262,7 @@ public class EmpleadoController {
 			p.setInt(1, dep);
 			int valor=p.executeUpdate();
 			
-			if(p.executeUpdate()<0) {
+			if(valor>0) {
 				System.out.println(valor+" filas afectadas");
 				p.close();
 				return true;
@@ -276,6 +275,7 @@ public class EmpleadoController {
 			e1.printStackTrace();
 		}
 		return false;
+		
 
 	}
 	

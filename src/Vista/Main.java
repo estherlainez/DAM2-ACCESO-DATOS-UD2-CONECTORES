@@ -74,7 +74,7 @@ public class Main {
 				Empleado em=new Empleado(dn,n,ap,sa,dep);
 				System.out.println(em);
 				EmpleadoController co=new EmpleadoController();
-				co.insertarEmpleados(em);
+				
 			
 				if(co.insertarEmpleados(em)==true) {
 					System.out.println("Hecho");
@@ -107,7 +107,7 @@ public class Main {
 				emp=new Empleado(dn,n,ap,sa,dep);
 				System.out.println(emp);
 				co=new EmpleadoController();
-				co.modificarEmpleados(emp,dniModificar);
+				//co.modificarEmpleados(emp,dniModificar);
 				
 				if(co.insertarEmpleados(emp)==true) {
 					System.out.println("Hecho");
@@ -161,7 +161,7 @@ public class Main {
 				departamento=new Departamento(id,n);
 				System.out.println(departamento);
 				dc=new DepartamentoController();
-				dc.modificarDepartamento(departamento,idModificar);
+				//dc.modificarDepartamento(departamento,idModificar);
 				
 				if(dc.modificarDepartamento(departamento,idModificar)==true) {
 					System.out.println("Hecho");
@@ -197,12 +197,11 @@ public class Main {
 				deco.informacionDepartamentoPorNombre(nombre);
 				break;
 			case 15:
-				//como me crea 4 filas de cada empleado que creo en vez de 100 me suma 400
 				System.out.println("Subida de salario");
 				System.out.println("Introduzca el departamento que se subira el sueldo a los empleados");
 				int num=teclado.nextInt();
 				con=new EmpleadoController();
-				con.subirSueldoMiembrosDepartamento(num);
+				
 				if(con.subirSueldoMiembrosDepartamento(num)==true) {
 					System.out.println("Hecho");
 				}else {
